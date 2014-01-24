@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/bguest/saneitized.png)](https://codeclimate.com/github/bguest/saneitized)
+
 # Saneitized
 
 Saneitized takes strings turns those values into their sane ruby equivalents. For example how many times have you done something like the following
