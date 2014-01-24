@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['benguest@gmail.com']
   spec.summary       = %q{Sanely converts string values to their ruby equivalent}
   spec.description   = %q{Converts ruby hash values from strings to fixnums, floats, true and false values if it can sanely do so.}
-  spec.homepage      = ''
+  spec.homepage      = 'https://github.com/bguest/saneitized'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
