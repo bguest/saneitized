@@ -1,4 +1,4 @@
-[![Code Climate](https://codeclimate.com/github/bguest/saneitized.png)](https://codeclimate.com/github/bguest/saneitized) [![Build Status](https://travis-ci.org/bguest/saneitized.png?branch=master)](https://travis-ci.org/bguest/saneitized) [![Coverage Status](https://coveralls.io/repos/bguest/saneitized/badge.png)](https://coveralls.io/r/bguest/saneitized)
+[![Code Climate](https://codeclimate.com/github/bguest/saneitized.png)](https://codeclimate.com/github/bguest/saneitized) [![Build Status](https://travis-ci.org/bguest/saneitized.png?branch=master)](https://travis-ci.org/bguest/saneitized) [![Coverage Status](https://coveralls.io/repos/bguest/saneitized/badge.png)](https://coveralls.io/r/bguest/saneitized) [![Gem Version](https://badge.fury.io/rb/saneitized.png)](http://badge.fury.io/rb/saneitized) 
 
 # Saneitized
 
