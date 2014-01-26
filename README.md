@@ -30,9 +30,9 @@ Or install it yourself as:
 
 Use it like so
 
-    sane_hash = Saneitize::Hash.new({:false =>  'false',
-                                     :number => '10',
-                                     :float  => '42.4'})
+    sane_hash = Saneitized::Hash.new({:false =>  'false',
+                                      :number => '10',
+                                      :float  => '42.4'})
 
     sane_hash[:false]   #=> false
     sane_hash[:number]  #=> 10
