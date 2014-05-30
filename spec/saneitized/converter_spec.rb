@@ -8,6 +8,12 @@ describe Saneitized do
       Saneitized.convert(unsullied).should == sanitized
     end
 
+    it 'should convert array' do
+      insane = ['1', '3', '2014-05-29 19:19:44 -0400']
+      sane = [1, 3, Time.new(2014,5,29,19,19,44,'-04:00')]
+      Saneitized.convert(insane).should == sane
+    end
+
     it "should change 'true' to true" do
       Saneitized.convert('true').should == true
     end
@@ -38,6 +44,10 @@ describe Saneitized do
 
     it 'should do nothing to nil' do
       Saneitized.convert(nil).should be_nil
+    end
+
+    it 'should convert datetime string' do
+      Saneitized.convert("2001-02-03 10:11:12 -0400").should == Time.new(2001,2,3,10,11,12,'-04:00')
     end
   end
 end

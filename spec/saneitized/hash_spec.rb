@@ -36,4 +36,12 @@ describe Saneitized::Hash do
     end
   end
 
+  describe "#[]=" do
+    it 'should sanitized assigned keys' do
+      hash = Saneitized::Hash.new
+      hash['key']= '10'
+      hash['key'].should == 10
+    end
+  end
+
 end
