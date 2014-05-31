@@ -35,6 +35,7 @@ the new value if it succeeds
     Boolean: Saneitized.convert('true') #=> true ('false' works the same way)
     Integer: Saneitized.convert('42') #=> 42
     Float:   Saneitized.convert('22.2') #=> 22.2
+    JSON:    Saneitized.convert("{\"hello\":\"goodbye\"}") #=> {"hello"=>"goodbye"}
     Time:    Saneitized.convert("2014-05-28T23:15:26Z") #=> 2014-05-28 23:15:26 UTC
 
 You can checkout `lib/saneitized/converter.rb` for more information

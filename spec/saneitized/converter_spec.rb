@@ -14,6 +14,12 @@ describe Saneitized do
       Saneitized.convert(insane).should == sane
     end
 
+    it 'should convert json' do
+      insane = {'all' => '34.2', 'base' => ['are', 'true', '10'] }.to_json
+      sane = {'all' => 34.2, 'base' => ['are', true, 10]}
+      Saneitized.convert(insane).should == sane
+    end
+
     it "should change 'true' to true" do
       Saneitized.convert('true').should == true
     end
