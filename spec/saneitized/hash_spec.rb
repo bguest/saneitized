@@ -20,7 +20,7 @@ describe Saneitized::Hash do
     end
 
     it 'should change integer string to integer' do
-      Saneitized::Hash.new({int: '12'})[:int].kind_of?(Fixnum).should be_true
+      Saneitized::Hash.new({int: '12'})[:int].kind_of?(Fixnum).should be true
     end
 
     it "should changer '12' to 12" do

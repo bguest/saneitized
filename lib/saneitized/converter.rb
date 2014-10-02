@@ -1,4 +1,5 @@
 require 'json'
+require 'chronic'
 
 module Saneitized
   def self.convert(unknown)
@@ -38,7 +39,7 @@ module Saneitized
     end
 
     def time?(unknown)
-      Time.parse(unknown)
+      Chronic.parse(unknown)
     rescue ArgumentError, TypeError
       false
     end

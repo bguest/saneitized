@@ -37,7 +37,7 @@ describe Saneitized do
     end
 
     it 'should change integer string to integer' do
-      Saneitized.convert('12').kind_of?(Fixnum).should be_true
+      Saneitized.convert('12').kind_of?(Fixnum).should be true
     end
 
     it "should changer '12' to 12" do
@@ -54,6 +54,10 @@ describe Saneitized do
 
     it 'should convert datetime string' do
       Saneitized.convert("2001-02-03 10:11:12 -0400").should == Time.new(2001,2,3,10,11,12,'-04:00')
+    end
+
+    it 'should leave marketplaces alone' do
+      Saneitized.convert('marketplaces').should == 'marketplaces'
     end
   end
 end
