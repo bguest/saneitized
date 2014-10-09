@@ -13,11 +13,6 @@ module Saneitized
       return (type == 'json') ? convert(value) : value
     end
 
-    #if value = Converter.integer?(unknown) then return value end
-    #if value = Converter.float?(unknown)   then return value end
-    #if (value = Converter.json?(unknown)) != :nope then return convert(value) end
-    #if value = Converter.time?(unknown)    then return value end
-
     unknown
   end
 
