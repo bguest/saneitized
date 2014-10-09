@@ -5,59 +5,65 @@ describe Saneitized do
     it 'should convert hash' do
       unsullied = {:kick_ass => 'true', :cities_sacked => '3'}
       sanitized = {:kick_ass => true, :cities_sacked => 3}
-      Saneitized.convert(unsullied).should == sanitized
+      expect(Saneitized.convert(unsullied)).to eql sanitized
     end
 
     it 'should convert array' do
       insane = ['1', '3', '2014-05-29 19:19:44 -0400']
       sane = [1, 3, Time.new(2014,5,29,19,19,44,'-04:00')]
-      Saneitized.convert(insane).should == sane
+      expect(Saneitized.convert(insane)).to eql sane
     end
 
     it 'should convert json' do
       insane = {'all' => '34.2', 'base' => ['are', 'true', '10'] }.to_json
       sane = {'all' => 34.2, 'base' => ['are', true, 10]}
-      Saneitized.convert(insane).should == sane
+      expect(Saneitized.convert(insane)).to eql sane
+    end
+
+    %w(nil null NULL).each do | nnil |
+      it "should change #{nnil} to nil" do
+        expect(Saneitized.convert(nnil)).to be nil
+      end
     end
 
     it "should change 'true' to true" do
-      Saneitized.convert('true').should == true
+      expect(Saneitized.convert('true')).to be true
     end
 
     it "should change 'false' to false" do
-      Saneitized.convert('false').should == false
+      expect(Saneitized.convert('false')).to be false
     end
 
     it "should change '12.34' to 12.34" do
-      Saneitized.convert('12.34').should == 12.34
+      expect(Saneitized.convert('12.34')).to eql 12.34
     end
 
     it 'should not change 0.5 to 0.0' do
-      Saneitized.convert(0.5).should == 0.5
+      expect(Saneitized.convert(0.5)).to eql 0.5
     end
 
     it 'should change integer string to integer' do
-      Saneitized.convert('12').kind_of?(Fixnum).should be true
+      expect(Saneitized.convert('12').kind_of?(Fixnum)).to eql true
     end
 
     it "should changer '12' to 12" do
-      Saneitized.convert('12').should == 12
+      expect(Saneitized.convert('12')).to be 12
     end
 
     it 'should do nothing to strings' do
-      Saneitized.convert('blah').should == 'blah'
+      expect(Saneitized.convert('blah')).to eql 'blah'
     end
 
     it 'should do nothing to nil' do
-      Saneitized.convert(nil).should be_nil
+      expect(Saneitized.convert(nil)).to be nil
     end
 
     it 'should convert datetime string' do
-      Saneitized.convert("2001-02-03 10:11:12 -0400").should == Time.new(2001,2,3,10,11,12,'-04:00')
+      expect(Saneitized.convert("2001-02-03 10:11:12 -0400")).to eql Time.new(2001,2,3,10,11,12,'-04:00')
     end
 
     it 'should leave marketplaces alone' do
-      Saneitized.convert('marketplaces').should == 'marketplaces'
+      expect(Saneitized.convert('marketplaces')).to eq 'marketplaces'
     end
   end
 end

@@ -33,6 +33,7 @@ It tries to convert strings in the following order, trying the next thing if it 
 the new value if it succeeds
 
     Boolean: Saneitized.convert('true') #=> true ('false' works the same way)
+    nil:     Saneitized.convert('null') #=> nil  (also converts 'nil' and 'NULL')
     Integer: Saneitized.convert('42') #=> 42
     Float:   Saneitized.convert('22.2') #=> 22.2
     JSON:    Saneitized.convert("{\"hello\":\"goodbye\"}") #=> {"hello"=>"goodbye"}

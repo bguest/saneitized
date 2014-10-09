@@ -4,7 +4,7 @@ describe Saneitized::Array do
 
   describe '#new' do
     it 'should convert array of numbers' do
-      Saneitized::Array.new(['1','2','3']).should == [1,2,3]
+      expect(Saneitized::Array.new(['1','2','3'])).to eql [1,2,3]
     end
   end
 
@@ -12,7 +12,7 @@ describe Saneitized::Array do
     it 'should convert object at index' do
       a = Saneitized::Array.new
       a[0] = 'true'
-      a[0].should == true
+      expect(a[0]).to eql true
     end
   end
 
@@ -20,7 +20,7 @@ describe Saneitized::Array do
     it 'should converted added object' do
       a = Saneitized::Array.new
       a << '11'
-      a.should == [11]
+      expect(a).to eql [11]
     end
   end
 end
