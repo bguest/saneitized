@@ -3,17 +3,18 @@ module Saneitized
 
   class Array < SimpleDelegator
 
-    def initialize(array = [])
-      super(array.map{|item| Saneitized.convert(item)})
+    def initialize(array = [], options = {})
+      @options = options
+      super(array.map{|item| Saneitized.convert(item, options)})
       self
     end
 
     def []=(index, value)
-      super index, Saneitized.convert(value)
+      super index, Saneitized.convert(value, @options)
     end
 
     def << (value)
-      super Saneitized.convert(value)
+      super Saneitized.convert(value, @options)
     end
 
     def push(*args)

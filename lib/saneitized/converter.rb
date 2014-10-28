@@ -5,15 +5,16 @@ module Saneitized
 
   def self.convert(unknown, options = {})
     options[:blacklist] ||= nil
-    return Saneitized::Hash.new(unknown) if unknown.is_a? ::Hash
-    return Saneitized::Array.new(unknown) if unknown.is_a? ::Array
+
+    return Saneitized::Hash.new(unknown, options) if unknown.is_a? ::Hash
+    return Saneitized::Array.new(unknown, options) if unknown.is_a? ::Array
     return unknown unless unknown.is_a? String #Only attempt to convert string
     return unknown if Array(options[:blacklist]).include?(unknown)
 
     %w(true false nil integer float json time).each do |type|
       value = Converter.send(type + '?', unknown)
       next if value == :nope
-      return (type == 'json') ? convert(value) : value
+      return (type == 'json') ? convert(value, options) : value
     end
 
     unknown

@@ -68,13 +68,19 @@ describe Saneitized do
       end
     end
 
-    it 'should respect blacklist' do
-      expect(Saneitized.convert('day', blacklist:'day')).to eql 'day'
-    end
+    context 'with blacklist' do 
+      it 'should not convertet blacklisted item' do
+        expect(Saneitized.convert('day', blacklist:'day')).to eql 'day'
+      end
 
-    it 'should respect array blacklist' do
-      expect(Saneitized.convert('day', blacklist:%w(hour day))).to eql 'day'
-    end
+      it 'should not converter item in blacklist array' do
+        expect(Saneitized.convert('day', blacklist:%w(hour day))).to eql 'day'
+      end
 
+      it 'should not convert item in hash in blacklist' do
+        expected = { 'today' => ['day', 'month', 'week'] }
+        expect(Saneitized.convert('{"today":["day","month","week"]}', blacklist:%w(day month week))).to eq expected
+      end
+    end
   end
 end
