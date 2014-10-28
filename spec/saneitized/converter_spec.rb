@@ -62,8 +62,19 @@ describe Saneitized do
       expect(Saneitized.convert("2001-02-03 10:11:12 -0400")).to eql Time.new(2001,2,3,10,11,12,'-04:00')
     end
 
-    it 'should leave marketplaces alone' do
-      expect(Saneitized.convert('marketplaces')).to eq 'marketplaces'
+    %w(marketplaces).each do |string|
+      it "should leave #{string} alone" do
+        expect(Saneitized.convert(string)).to eq string
+      end
     end
+
+    it 'should respect blacklist' do
+      expect(Saneitized.convert('day', blacklist:'day')).to eql 'day'
+    end
+
+    it 'should respect array blacklist' do
+      expect(Saneitized.convert('day', blacklist:%w(hour day))).to eql 'day'
+    end
+
   end
 end

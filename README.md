@@ -58,6 +58,12 @@ as regular arrays except that new assigned values will also be saneitized
     hash['fred'] = '234'
     hash['fred'] #=> 234
 
+### Blacklists
+
+You can make sanitized ignore certain strings by includeing a blacklist option 
+
+   Sanitized.convert('23', blacklist:%w(21 22 23)) => '23'
+
 ### Important Notes
 
 To convert a sanetized array/hash back to a non-saneitized hash, simply call the #to_a and #to_h
