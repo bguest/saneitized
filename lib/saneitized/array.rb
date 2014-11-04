@@ -1,7 +1,8 @@
+require 'delegate'
 
 module Saneitized
 
-  class Array < SimpleDelegator
+  class Array < ::SimpleDelegator
 
     def initialize(array = [], options = {})
       @options = options

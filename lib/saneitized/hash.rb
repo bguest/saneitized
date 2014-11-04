@@ -1,6 +1,8 @@
+require 'delegate'
+
 module Saneitized
 
-  class Hash < SimpleDelegator
+  class Hash < ::SimpleDelegator
 
     def initialize(hash = {}, options = {})
       @options = options
