@@ -28,7 +28,7 @@ Or install it yourself as:
 
 ## Usage
 
-The guts of sanitized is it's convert method, it will converts strings into their approprate types.
+The guts of saneitized is it's convert method, it will converts strings into their appropriate types.
 It tries to convert strings in the following order, trying the next thing if it fails or returning
 the new value if it succeeds
 
@@ -41,15 +41,15 @@ the new value if it succeeds
 
 You can checkout `lib/saneitized/converter.rb` for more information
 
-Sanetized ignores all non-string types except Arrays and Hashes.
+Saneitized ignores all non-string types except Arrays and Hashes.
 
 ### Arrays and Hashes
 
-Arrays and hashes are recursivly traversed and saneitized. So something like
+Arrays and hashes are recursively traversed and saneitized. So something like
 
     insane = [{'number' => '10'}, {'float' => '34.5'}]
-    sane = Sanitized.convert(insane)              # Sanitized::Array.new(insane) is equivelent
-    sane == [{'number' => 10}, {'float' => 34.5}] # Note this is a Sanitized::Array
+    sane = Saneitized.convert(insane)              # Saneitized::Array.new(insane) is equivelent
+    sane == [{'number' => 10}, {'float' => 34.5}] # Note this is a Saneitized::Array
 
 Note that the returned types are Saneitized::Hash or Saneitized::Array, these function almost the same
 as regular arrays except that new assigned values will also be saneitized
@@ -60,9 +60,9 @@ as regular arrays except that new assigned values will also be saneitized
 
 ### Blacklists
 
-You can make sanitized ignore certain strings by includeing a blacklist option 
+You can make saneitized ignore certain strings by including a blacklist option
 
-   Sanitized.convert('23', blacklist:%w(21 22 23)) => '23'
+   Saneitized.convert('23', blacklist:%w(21 22 23)) => '23'
 
 ### Important Notes
 
@@ -101,9 +101,9 @@ See the specs for more examples.
 
 ## Contributing
 
-1. Fork it ( http://github.com/<my-github-username>/saneitized_hash/fork )
+1. Fork it ( http://github.com//saneitized_hash/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
-2. Writes Specs, pull requrests will not be accepted without tests.
+2. Writes Specs, pull requests will not be accepted without tests.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
