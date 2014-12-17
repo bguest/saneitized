@@ -62,7 +62,12 @@ as regular arrays except that new assigned values will also be saneitized
 
 You can make saneitized ignore certain strings by including a blacklist option
 
-   Saneitized.convert('23', blacklist:%w(21 22 23)) => '23'
+    Saneitized.convert('23', blacklist:%w(21 22 23)) #=> '23'
+
+You can also black list keys of hashes if thats your thing
+
+    Saneitized.convert( {name:'12345', age:'21'}, :key_blacklist => :name}) #=> {name:'12345', age: 21}
+    Saneitized.convert( {name:'12345', 'age' => '21'}, :key_blacklist => [:name, 'age'}) #=> {name:'12345', 'age' => '21'}
 
 ### Important Notes
 

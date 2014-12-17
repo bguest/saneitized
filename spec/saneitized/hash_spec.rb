@@ -34,6 +34,21 @@ describe Saneitized::Hash do
     it 'should do nothing to nil' do
       expect(Saneitized::Hash.new({nill: nil})[:nill]).to be nil
     end
+
+    context 'with key_blacklist option' do
+      it 'should not convert blacklisted key' do
+        sane = Saneitized::Hash.new({name:'21', age:21}, :key_blacklist => :name)
+        expected = {name:'21', age:21}
+        expect(sane).to eql expected
+      end
+
+      it 'should not convert blacklisted keys' do
+        sane = Saneitized::Hash.new({name:'21', 'foo'=>'33.5', age:21}, :key_blacklist => [:name, 'foo'])
+        expected = {name:'21', 'foo'=>'33.5', age:21}
+        expect(sane).to eql expected
+      end
+    end
+
   end
 
   describe "#[]=" do

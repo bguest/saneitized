@@ -6,8 +6,11 @@ module Saneitized
 
     def initialize(hash = {}, options = {})
       @options = options
+      @key_blacklist = Array(options.fetch(:key_blacklist){[]})
       new_hash = {}
-      hash.each do |key, value| new_hash[key] = Saneitized.convert(value, options) end
+      hash.each do |key, value|
+        new_hash[key] = convert_key_value(key, value)
+      end
       super(new_hash)
       self
     end
@@ -19,5 +22,16 @@ module Saneitized
     def merge!(*args, &block)
       raise NotImplementedError
     end
+
+    private
+
+    def convert_key_value(key, value)
+      if @key_blacklist.include? key
+        value
+      else
+        Saneitized.convert(value, @options)
+      end
+    end
+
   end
 end

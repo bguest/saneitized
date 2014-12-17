@@ -82,5 +82,13 @@ describe Saneitized do
         expect(Saneitized.convert('{"today":["day","month","week"]}', blacklist:%w(day month week))).to eq expected
       end
     end
+
+    context 'with key_blacklist' do
+      it 'should respect key_blacklist' do
+        expected = {name:'12345', 'age' => 21}
+        sane = Saneitized.convert( {name:'12345', 'age' => '21'}, :key_blacklist => :name)
+        expect(sane).to eq expected
+      end
+    end
   end
 end
