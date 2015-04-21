@@ -58,6 +58,15 @@ as regular arrays except that new assigned values will also be saneitized
     hash['fred'] = '234'
     hash['fred'] #=> 234
 
+### Saneitized Keys?
+
+If for some reason you have a hash like `{'123' => 'foo', '124' => 'bar'}` and you want
+to saneitze the keys of the hash, Sanitized allows you to do that too
+
+    hash = {'123' => 'foo', '124' => 'bar'}
+    sane = Sanitized.convert(hash, saneitize_keys: true)
+    sane #=> {123 => 'foo', 124 => 'bar'}
+
 ### Blacklists
 
 You can make saneitized ignore certain strings by including a blacklist option

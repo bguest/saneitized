@@ -49,6 +49,13 @@ describe Saneitized::Hash do
       end
     end
 
+    context 'with saneitize_keys: true' do
+      it 'should saneitize keys' do
+        sane = Saneitized::Hash.new({'12345' => 'foo', '234' => '123.2'}, saneitize_keys: true)
+        expected = {12345 => 'foo', 234 => 123.2}
+        expect(sane).to eql expected
+      end
+    end
   end
 
   describe "#[]=" do

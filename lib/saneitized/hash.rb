@@ -9,7 +9,7 @@ module Saneitized
       @key_blacklist = Array(options.fetch(:key_blacklist){[]})
       new_hash = {}
       hash.each do |key, value|
-        new_hash[key] = convert_key_value(key, value)
+        new_hash[sane_key(key)] = convert_key_value(key, value)
       end
       super(new_hash)
       self
@@ -24,6 +24,10 @@ module Saneitized
     end
 
     private
+
+    def sane_key(key)
+      @options[:saneitize_keys] ? Saneitized.convert(key) : key
+    end
 
     def convert_key_value(key, value)
       if @key_blacklist.include? key
