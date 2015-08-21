@@ -11,7 +11,7 @@ describe Saneitized do
     it 'should convert array' do
       insane = ['1', '3', '2014-05-29 19:19:44 -0400']
       sane = [1, 3, Time.new(2014,5,29,19,19,44,'-04:00')]
-      expect(Saneitized.convert(insane)).to eql sane
+      expect(Saneitized.convert(insane, add: :time)).to eql sane
     end
 
     it 'should convert json' do
@@ -59,16 +59,16 @@ describe Saneitized do
     end
 
     it 'should convert datetime string' do
-      expect(Saneitized.convert("2001-02-03 10:11:12 -0400")).to eql Time.new(2001,2,3,10,11,12,'-04:00')
+      expect(Saneitized.convert("2001-02-03 10:11:12 -0400", add: :time)).to eql Time.new(2001,2,3,10,11,12,'-04:00')
     end
 
-    %w(marketplaces).each do |string|
+    ["marketplaces", "cpr-first-aid.wonderhowto.com"].each do |string|
       it "should leave #{string} alone" do
         expect(Saneitized.convert(string)).to eq string
       end
     end
 
-    context 'with blacklist' do 
+    context 'with blacklist' do
       it 'should not convertet blacklisted item' do
         expect(Saneitized.convert('day', blacklist:'day')).to eql 'day'
       end
@@ -90,5 +90,25 @@ describe Saneitized do
         expect(sane).to eq expected
       end
     end
+
+    let(:input){ { integer:'12345', float:'12.345', true:'true', false:'false' } }
+
+    context 'with except' do
+      it 'should not convert ' do
+        expected = {integer: 12345, float:'12.345', true: 'true', false: false }
+        sane = Saneitized.convert( input, except:[:float, :true] )
+        expect(sane).to eq expected
+      end
+    end
+
+    context 'with only' do
+      it 'should only used passed in converters' do
+        expected = {integer: 12345.0, float: 12.345, true: true, false:'false'}
+        sane = Saneitized.convert( input, only:[:float, :true, :false], except: :false)
+        expect(sane).to eq expected
+      end
+    end
+
+
   end
 end

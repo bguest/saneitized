@@ -37,7 +37,13 @@ the new value if it succeeds
     Integer: Saneitized.convert('42') #=> 42
     Float:   Saneitized.convert('22.2') #=> 22.2
     JSON:    Saneitized.convert("{\"hello\":\"goodbye\"}") #=> {"hello"=>"goodbye"}
-    Time:    Saneitized.convert("2014-05-28T23:15:26Z") #=> 2014-05-28 23:15:26 UTC
+
+Additionaly you can sanitize time as well
+
+    Time:    Saneitized.convert("2014-05-28T23:15:26Z", :add => :time) #=> 2014-05-28 23:15:26 UTC
+
+Time is left out of the default sanitizers because the Chronic parser used is pretty agressive and
+will convert some things you might not thing would be time.
 
 You can checkout `lib/saneitized/converter.rb` for more information
 
@@ -77,6 +83,24 @@ You can also black list keys of hashes if thats your thing
 
     Saneitized.convert( {name:'12345', age:'21'}, :key_blacklist => :name}) #=> {name:'12345', age: 21}
     Saneitized.convert( {name:'12345', 'age' => '21'}, :key_blacklist => [:name, 'age'}) #=> {name:'12345', 'age' => '21'}
+
+### Sanitizers
+
+By default convert runs through the sanitizers, but you can pick and choose what sanitizers you want to use.
+
+You can select to 'only' use certian converter
+
+    Saneitized.convert( {a_float:'12.34', an_integer:'1234'}, :only => [:integer] ) #=> {a_float:'12.34', an_integer: 1234}
+
+You can choose to use all the sanitizers 'except' a selection
+
+    Saneitized.convert( {a_float:'12.34', an_integer:'1234'}, :except => :float ) #=> {a_float:'12.34', an_integer: 1234}
+
+You can also add sanitizers that are overly agressive and not part of the default set
+
+    Saneitized.convert( "2001-02-03 10:11:12 -0400", add: :time) #=> 2001-02-03 10:11:12 -0400
+
+You can pass these options as a single symbol or as an array of symbols
 
 ### Important Notes
 
